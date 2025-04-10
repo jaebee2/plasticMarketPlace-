@@ -16,30 +16,42 @@
   <script>
     const token = localStorage.getItem('token');
     const userInfo = document.getElementById('user-info');
-
+  
     if (!token) {
-      window.location.href = '/';
+      window.location.href = 'index.html'; // Redirect if no token
+    } else {
+      fetch('http://localhost:3000/dashboard', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Unauthorized');
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (data.user) {
+          userInfo.textContent = `Hello, ${data.user.name} (${data.user.role})`;
+        } else {
+          userInfo.textContent = 'Unable to load user data.';
+        }
+      })
+      .catch((err) => {
+        console.error('Dashboard fetch failed:', err);
+        localStorage.removeItem('token');
+        window.location.href = 'index.html';
+      });
     }
-
-    fetch('http://localhost:3000/dashboard', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.user) {
-        userInfo.textContent = `Hello, ${data.user.name} (${data.user.role})`;
-      } else {
-        window.location.href = '/';
-      }
-    })
-    .catch(() => window.location.href = '/');
-
-    document.getElementById('logout').onclick = () => {
+  
+    document.getElementById('logout').addEventListener('click', () => {
       localStorage.removeItem('token');
-      window.location.href = '/';
-    };
+      window.location.href = 'index.html';
+    });
   </script>
+  
 </body>
 </html>
