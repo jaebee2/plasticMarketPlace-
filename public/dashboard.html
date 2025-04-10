@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Your Dashboard</h1>
+    <p id="user-info">Loading...</p>
+    <button id="logout">Log Out</button>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+    const userInfo = document.getElementById('user-info');
+
+    if (!token) {
+      window.location.href = '/';
+    }
+
+    fetch('http://localhost:3000/dashboard', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.user) {
+        userInfo.textContent = `Hello, ${data.user.name} (${data.user.role})`;
+      } else {
+        window.location.href = '/';
+      }
+    })
+    .catch(() => window.location.href = '/');
+
+    document.getElementById('logout').onclick = () => {
+      localStorage.removeItem('token');
+      window.location.href = '/';
+    };
+  </script>
+</body>
+</html>
