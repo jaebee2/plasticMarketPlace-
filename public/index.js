@@ -2,7 +2,7 @@ const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
 
 // Replace with your backend URL if different
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://localhost:3000';
 
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -34,10 +34,8 @@ loginForm.addEventListener('submit', async (e) => {
   if (result.token) {
     alert('Login successful!');
     localStorage.setItem('token', result.token);
-    window.location.href = '/dashboard.html';  // 👈 redirect
+    // Redirect or load user data...
   } else {
     alert(result.error);
   }
-  
-  
 });
