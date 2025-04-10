@@ -1,0 +1,59 @@
+/* Global variables */
+:root {
+    --primary-green: #2e4f38;
+    --text-color: #333333;
+    --navbar-bg: #ffffff;
+    --page-bg: #f8f9f8;
+}
+/* Global styles */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: var(--page-bg);
+    color: var(--text-color)
+}
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: var(--navbar-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-green)
+}
+.logo-highlight {
+    color: var(--primary-green);
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+.nav-links li a:hover {
+    color: var(--primary-green);
+}
+.get-started-btn {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+.get-started-btn:hover {
+    background-color: #24402d;
+}
