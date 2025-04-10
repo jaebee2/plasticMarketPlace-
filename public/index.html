@@ -3,9 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>hello from server</h1>
+    <div class="container">
+      <h1>EcoExchange</h1>
+
+      <!-- Signup Form -->
+      <form id="signupForm">
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Name" name="name" required />
+        <input type="email" placeholder="Email" name="email" required />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+        <select name="role">
+          <option value="buyer">Buyer</option>
+          <option value="owner">Owner</option>
+        </select>
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <!-- Login Form -->
+      <form id="loginForm">
+        <h2>Log In</h2>
+        <input type="email" placeholder="Email" name="email" required />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+
+    <script src="index.js"></script>
   </body>
 </html>
