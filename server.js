@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
-const SECRET = 'your_jwt_secret_key';
+const SECRET = '1234567';
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
