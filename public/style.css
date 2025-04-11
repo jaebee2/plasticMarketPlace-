@@ -23,23 +23,36 @@ body {
     color: #2E7D32;
   }
   
-  .signupform {
-    margin-top: 20px;
+  .signupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: white;
+    max-width: 300px;
+    width: 100%;
   }
   
-  input, select, button {
+ .signupForm input{
+     padding: 10px;
+     border: none;
+     border-radius: 5px;
+ }
+.signupForm button{
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+ select {
     width: 100%;
     margin-bottom: 12px;
     padding: 10px;
     font-size: 16px;
   }
   
-  button {
-    background: #2E7D32;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
   
   button:hover {
     background: #1b5e20;
