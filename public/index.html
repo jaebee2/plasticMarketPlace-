@@ -4,16 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login & Signup</title>
+  <link rel="stylesheet" href="navbar_styles.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>EcoExchange</h1>
-
     <!-- Signup Form -->
-    <form id="signupForm">
+    <form class="signupForm">
       <h2>Sign Up</h2>
-      <input type="text" placeholder="Name" name="name" required />
+      <input type="text" placeholder="Full Name" name="name" required />
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" required />
       <select name="role">
@@ -21,6 +20,7 @@
         <option value="owner">Owner</option>
       </select>
       <button type="submit">Sign Up</button>
+      <p>Already have an account? <a href="#">Log In</a></p>
     </form>
 
     <!-- Login Form -->
@@ -29,6 +29,7 @@
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" required />
       <button type="submit">Log In</button>
+      <p>Do not have an account? <a href="#">Sign Up</a></p>
     </form>
   </div>
 
