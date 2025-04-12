@@ -6,12 +6,16 @@ const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
-const SECRET = 'your_jwt_secret_key';
+const SECRET = '1234567';
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true
+}));
+
 app.use(express.json());
 
 // MySQL connection
@@ -95,24 +99,21 @@ app.listen(PORT, () => {
 // Middleware to verify JWT
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  console.log('📦 Auth Header:', authHeader);
 
-  if (!token) return res.sendStatus(401);
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) {
+    console.log('❌ No token found');
+    return res.status(401).json({ error: 'No token provided' });
+  }
 
   jwt.verify(token, SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      console.log('❌ JWT verification failed:', err.message);
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+    console.log('✅ JWT verified. User:', user);
     req.user = user;
     next();
   });
 };
-
-// Dashboard route
-app.get('/dashboard', authenticateToken, (req, res) => {
-  const userId = req.user.id;
-
-  db.query('SELECT user_id, name, email, role FROM Users WHERE user_id = ?', [userId], (err, results) => {
-    if (err || results.length === 0) return res.status(404).json({ error: 'User not found' });
-
-    res.json({ user: results[0] });
-  });
-});

@@ -3,55 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to Your Dashboard</h1>
-    <p id="user-info">Loading...</p>
-    <button id="logout">Log Out</button>
+  <div id="dashboard-container">
+    <h1>Welcome to your Dashboard</h1>
+    <div id="user-info"></div>
+    <p id="status-message">Loading user info...</p>
   </div>
 
-  <script>
-    const token = localStorage.getItem('token');
-    const userInfo = document.getElementById('user-info');
-  
-    if (!token) {
-      window.location.href = 'index.html'; // Redirect if no token
-    } else {
-      fetch('http://localhost:3000/dashboard', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Unauthorized');
-        }
-        return res.json();
-      })
-      .then(data => {
-        if (data.user) {
-          userInfo.textContent = `Hello, ${data.user.name} (${data.user.role})`;
-        } else {
-          userInfo.textContent = 'Unable to load user data.';
-        }
-      })
-      .catch((err) => {
-        console.error('Dashboard fetch failed:', err);
-        localStorage.removeItem('token');
-        window.location.href = 'index.html';
-      });
-    }
-  
-    document.getElementById('logout').addEventListener('click', () => {
-      localStorage.removeItem('token');
-      window.location.href = 'index.html';
-    });
-  </script>
-  
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
