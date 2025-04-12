@@ -117,3 +117,32 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+/review endpoint
+app.post('/review', async (req, res) => {
+  try {
+    const { reviewer_id, reviewed_user_id, rating, comment, type } = req.body
+    if (!reviewer_id || !reviewed_user_id || !rating || !type) {
+      return res.status(400).json({ error: 'Missing required fields!' });
+    }
+
+    
+    const [result] = await pool.execute(
+      `INSERT INTO reviews 
+      (reviewer_id, reviewed_user_id, rating, comment, type) 
+      VALUES (?, ?, ?, ?, ?)`,
+      [reviewer_id, reviewed_user_id, rating, comment, type]
+    );
+
+  
+    const [newReview] = await pool.execute(
+      'SELECT * FROM reviews WHERE id = ?',
+      [result.insertId]
+    );
+    
+    res.status(201).json(newReview[0]);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error!' });
+  }
+});
