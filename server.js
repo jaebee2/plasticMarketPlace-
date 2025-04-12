@@ -55,6 +55,17 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Endpoint to get listings
+app.get('/listings', (req, res) => {
+  db.query('SELECT * FROM listings', (err, results) => {
+    if (err) {
+      console.error('Error fetching items:', err);
+      return res.status(404).json({ error: 'Listings cannot be found' });
+    }
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Auth server running on http://localhost:${PORT}`);
 });
