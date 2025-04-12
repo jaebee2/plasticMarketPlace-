@@ -1,0 +1,170 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+}
+body {
+  /* font-family: 'Segoe UI', sans-serif; */
+  background-color: #f9f8f4;
+  color: #2f3e2f;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* HERO SECTION */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #f0f4e9;
+  padding: 60px 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+}
+
+.hero-image {
+  max-width: 200px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #4d5c4d;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.primary-btn {
+  background-color: #2f4f2f;
+  color: #fff;
+  border: none;
+}
+
+.primary-btn:hover {
+  background-color: #3a5f3a;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  border: 2px solid #2f4f2f;
+  color: #2f4f2f;
+}
+
+.secondary-btn:hover {
+  background-color: #e2eee2;
+}
+
+/* HOW IT WORKS SECTION */
+.how-it-works {
+  margin-bottom: 60px;
+}
+
+.how-it-works h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.step {
+  background-color: #fff;
+  border: 1px solid #d9e2d9;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+}
+
+.step img {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+/* MARKETPLACE SECTION */
+.marketplace h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.materials {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.material {
+  background-color: #fff;
+  border: 1px solid #d9e2d9;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  text-align: center;
+}
+
+.material img {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+/* WHY CHOOSE US SECTION */
+.why-choose-us {
+  margin-top: 60px;
+}
+
+.why-choose-us h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.benefits {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.benefit {
+  max-width: 300px;
+  text-align: center;
+}
