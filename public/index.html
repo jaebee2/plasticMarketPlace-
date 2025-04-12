@@ -8,14 +8,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+    <nav class="navbar">
+        <div class="logo"><span class="logo-highlight">Trash</span>Master</div>
+        <ul class="nav-links">
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <a href="#" class="get-started-btn">Get Started</a>
+    </nav>
+  <div class="auth-wrapper">
     <!-- Signup Form -->
     <form class="signupForm">
       <h2>Sign Up</h2>
       <input type="text" placeholder="Full Name" name="name" required />
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" required />
-      <select name="role">
+      <select name="role"> Choose a role
         <option value="buyer">Buyer</option>
         <option value="owner">Owner</option>
       </select>
@@ -24,14 +34,14 @@
     </form>
 
     <!-- Login Form -->
-    <form id="loginForm">
+    <form class="loginForm">
       <h2>Log In</h2>
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" required />
       <button type="submit">Log In</button>
       <p>Do not have an account? <a href="#">Sign Up</a></p>
     </form>
-  </div>
+  </div> 
 
   <script src="script.js"></script>
 </body>
