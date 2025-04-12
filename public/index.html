@@ -20,7 +20,7 @@
     </nav>
   <div class="auth-wrapper">
     <!-- Signup Form -->
-    <form class="signupForm">
+    <form class="signupForm" id="signupForm"  >
       <h2>Sign Up</h2>
       <input type="text" placeholder="Full Name" name="name" required />
       <input type="email" placeholder="Email" name="email" required />
@@ -28,13 +28,14 @@
       <select name="role"> Choose a role
         <option value="buyer">Buyer</option>
         <option value="owner">Owner</option>
+        <option value="admin">Admin</option>
       </select>
       <button type="submit">Sign Up</button>
       <p>Already have an account? <a href="#">Log In</a></p>
     </form>
 
     <!-- Login Form -->
-    <form class="loginForm">
+    <form class="loginForm" id="loginForm">
       <h2>Log In</h2>
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" required />
