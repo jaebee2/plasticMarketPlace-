@@ -141,34 +141,37 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-app.post('/review', async (req, res) => {
-  try {
-    const { reviewer_id, reviewed_user_id, rating, comment, type } = req.body
-    if (!reviewer_id || !reviewed_user_id || !rating || !type) {
-      return res.status(400).json({ error: 'Missing required fields!' });
+app.post('/review', authenticateToken, (req, res) => {
+  const { reviewed_user_id, rating, comment, type } = req.body;
+  const reviewer_id = req.user.id;
+
+  if (!reviewer_id || !reviewed_user_id || !rating || !type) {
+    return res.status(400).json({ error: 'Missing required fields!' });
+  }
+
+  const insertQuery = `
+    INSERT INTO reviews (reviewer_id, reviewed_user_id, rating, comment, type)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  db.query(insertQuery, [reviewer_id, reviewed_user_id, rating, comment, type], (err, result) => {
+    if (err) {
+      console.error('❌ Review insert error:', err);
+      return res.status(500).json({ error: 'Server error while inserting review' });
     }
 
-    
-    const [result] = await pool.execute(
-      `INSERT INTO reviews 
-      (reviewer_id, reviewed_user_id, rating, comment, type) 
-      VALUES (?, ?, ?, ?, ?)`,
-      [reviewer_id, reviewed_user_id, rating, comment, type]
-    );
+    const selectQuery = 'SELECT * FROM reviews WHERE id = ?';
+    db.query(selectQuery, [result.insertId], (err, reviewResult) => {
+      if (err) {
+        console.error('❌ Review fetch error:', err);
+        return res.status(500).json({ error: 'Server error while fetching review' });
+      }
 
-  
-    const [newReview] = await pool.execute(
-      'SELECT * FROM reviews WHERE id = ?',
-      [result.insertId]
-    );
-    
-    res.status(201).json(newReview[0]);
-    
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error!' });
-  }
+      res.status(201).json(reviewResult[0]);
+    });
+  });
 });
+
 app.get('/admin/users', authenticateToken, (req, res) => {
   if (req.user.role !== 'admin') {
     return res.status(403).json({ error: 'Access denied' });
@@ -232,4 +235,18 @@ app.post('/review', (req, res) => {
     });
   });
 });
+app.get('/dashboard', authenticateToken, (req, res) => {
+  const userId = req.user.id;
+
+  const query = 'SELECT id, name, email, role FROM users WHERE id = ?';
+  db.query(query, [userId], (err, results) => {
+    if (err || results.length === 0) {
+      return res.status(500).json({ error: 'Failed to fetch user info' });
+    }
+
+    const user = results[0];
+    res.json({ user });
+  });
+});
+
 
