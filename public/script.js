@@ -1,7 +1,6 @@
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
 
-
 const BASE_URL = 'http://localhost:3000';
 
 signupForm.addEventListener('submit', async (e) => {
@@ -32,9 +31,11 @@ loginForm.addEventListener('submit', async (e) => {
 
   const result = await res.json();
   if (result.token) {
-    alert('Login successful!');
     localStorage.setItem('token', result.token);
-    window.location.href = '/dashboard.html';
+    alert('Login successful!');
+    setTimeout(() => {
+      window.location.href = '/dashboard.html';
+    }, 300); // slight delay to make sure token is saved
   } else {
     alert(result.error);
   }

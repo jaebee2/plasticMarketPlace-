@@ -60,38 +60,61 @@ app.post('/signup', (req, res) => {
 // Login endpoint
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
+  console.log('📩 Login request:', { email, password }); // Log input
+
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required' });
+  }
 
   const query = 'SELECT * FROM users WHERE email = ?';
   db.query(query, [email], (err, results) => {
     if (err) {
-      console.error('DB error:', err);
-      return res.status(500).json({ error: 'Internal server error' });
+      console.error('❌ DB error:', err);
+      return res.status(500).json({ error: 'Database error' });
     }
 
     if (results.length === 0) {
-      console.log('No user found with that email');
+      console.warn('⚠️ No user found with email:', email);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const user = results[0];
-    console.log('User found:', user);
+    console.log('✅ User found in DB:', user);
+
+    if (!user.password) {
+      console.error('❌ User has no password stored!');
+      return res.status(500).json({ error: 'Server error: invalid user data' });
+    }
 
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err) {
-        console.error('Bcrypt error:', err);
-        return res.status(500).json({ error: 'Hashing failed' });
+        console.error('❌ Bcrypt compare failed:', err);
+        return res.status(500).json({ error: 'Password comparison failed' });
       }
 
       if (!isMatch) {
-        console.log('Password does not match');
+        console.warn('⚠️ Password does not match for:', email);
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
       const token = jwt.sign({ id: user.id, role: user.role }, SECRET, { expiresIn: '1h' });
+      console.log('🎉 Login successful, token created');
       res.json({ message: 'Login successful', token, user });
     });
   });
 });
+
+
+app.get('/listings', (req, res) => {
+  db.query('SELECT * FROM listings', (err, results) => {
+    if (err) {
+      console.error('Error fetching items:', err);
+      return res.status(404).json({ error: 'Listings cannot be found' });
+    }
+    res.json(results);
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Auth server running on http://localhost:${PORT}`);
@@ -116,4 +139,3 @@ const authenticateToken = (req, res, next) => {
     req.user = user;
     next();
   });
-};
