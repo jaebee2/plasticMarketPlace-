@@ -1,16 +1,21 @@
 body {
+    margin: 0;
+    padding-top: 80px;
+    background-image: url('trash.jpg');
+    background-size: cover;
+    background-position: center;
     font-family: Arial, sans-serif;
-    background: #f4f6f5;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
   
-  .container {
-    width: 350px;
-    background: white;
-    padding: 20px;
+  .auth-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
@@ -20,23 +25,68 @@ body {
     color: #2E7D32;
   }
   
-  form {
-    margin-top: 20px;
+  .signupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: white;
+    max-width: 300px;
+    width: 100%;
   }
   
-  input, select, button {
+ .signupForm input{
+     padding: 10px;
+     border: 1px solid rgba(255, 255, 255, 0.4);
+     border-radius: 6px;
+     background: rgba(255, 255, 255, 0.1);
+     color: green;
+     backdrop-filter: blur(4px);
+     -webkit-backdrop-filter: blur(4px);
+ }
+ .loginForm input{
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: green;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+ }  
+
+.signupForm button{
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.loginForm button{
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+ select {
     width: 100%;
     margin-bottom: 12px;
     padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: black;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     font-size: 16px;
   }
-  
-  button {
-    background: #2E7D32;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
+ p {
+  color: white;
+ } 
   
   button:hover {
     background: #1b5e20;
